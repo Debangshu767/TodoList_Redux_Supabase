@@ -47,10 +47,11 @@ function Login() {
   
     return (
       <>
-        <div className="flex flex-col gap-4 items-center m-auto">
-          <h1 className="text-2xl text-blue-400  font-black p-2 rounded-lg m-2">
-            Login
-          </h1>
+        <div className="flex flex-col gap-2 m-auto">
+        <div>
+            <h1 className=" text-3xl bg-blue-400 text-white  font-black p-2  rounded-b-lg  mt-0">TaskIte</h1>
+          <h1 className=" text-3xl text-blue-400  font-thin p-4 rounded-lg">Login</h1>
+          </div>
   
           <Formik
             initialValues={{email: "", password: "" }}

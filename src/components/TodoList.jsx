@@ -24,7 +24,8 @@ function TodoList() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 items-center w-full">
+    <div className="flex flex-col gap-7 p-7 items-center w-full">
+      <div className='  bg-blue-300 px-4 py-2 rounded-lg text-white'> Let's get things DONE ! </div>
         {loading ?  <p>Loading</p> : <>
         {Todos.map((todo) => (
           <Todo key = {todo.id} todo = {todo} />

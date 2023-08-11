@@ -21,6 +21,7 @@ function InputField() {
       .insert([{ Title: newTodo , user_id: token.user.id }])
       .select();
       dispatch(createTodo(data[0]))
+      
   };
 
   const handleLogout = () => {
@@ -32,10 +33,10 @@ function InputField() {
   return (
     <>
     <div className='flex flex-row items-center rounded-b-lg justify-between m-auto max-w-[800px] bg-blue-400 p-4'>
-    <div className=" text-white font-black text-3xl p-2uppercase">Todo List</div>
-    <div className=' flex flex-row gap-2 items-center'>
-      <div className=' font-bold text-xl text-white uppercase'>{token.user.user_metadata.user_name}</div>
-      <button onClick={handleLogout} className="bg-red-300 uppercase p-2 rounded-full text-white hover:bg-red-400"><IoLogOut/></button>
+    <div className=" text-white font-black text-3xl p-2uppercase">TaskIte</div>
+    <div className=' flex flex-row gap-6 items-center'>
+      <div className=' font-bold text-xl text-white capitalize'>{token.user.user_metadata.user_name}</div>
+      <button onClick={handleLogout} className="text-xl   uppercase p-2 rounded-full text-white hover:bg-red-400"><IoLogOut/></button>
     </div>
     </div>
     
