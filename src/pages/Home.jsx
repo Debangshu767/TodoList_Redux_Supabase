@@ -1,6 +1,6 @@
 import React from 'react'
-import InputField from './InputField'
-import TodoList from './TodoList'
+import InputField from '../components/InputField'
+import TodoList from '../components/TodoList'
 
 const Home = () => {
   return (

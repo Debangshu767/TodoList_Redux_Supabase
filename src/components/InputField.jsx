@@ -1,13 +1,16 @@
 import { supabase } from '../supabaseClient'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createTodo } from '../store/Slices/TodoSlice';
-
+import { useNavigate } from 'react-router-dom';
+import { IoLogOut } from 'react-icons/io5';
 
 
   
 
 function InputField() {
+  const navigate = useNavigate()
+  const token =  useSelector(state=>state.token.token)
     const dispatch = useDispatch()
 
     const [newTodo, setNewTodo] = useState([]);
@@ -15,21 +18,33 @@ function InputField() {
   const handleAdd = async (newTodo) => {
     const { data, error } = await supabase
       .from("TodoItem")
-      .insert([{ Title: newTodo }])
+      .insert([{ Title: newTodo , user_id: token.user.id }])
       .select();
       dispatch(createTodo(data[0]))
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('token')
+    navigate('/')
+
+  }
+
   return (
     <>
-
-    <div className=" flex justify-center text-blue-400 font-black text-3xl items-center p-2 m-auto uppercase">Todo List</div>
-      <div className="flex flex-row gap-2 justify-center items-center p-2" >
+    <div className='flex flex-row items-center rounded-b-lg justify-between m-auto max-w-[800px] bg-blue-400 p-4'>
+    <div className=" text-white font-black text-3xl p-2uppercase">Todo List</div>
+    <div className=' flex flex-row gap-2 items-center'>
+      <div className=' font-bold text-xl text-white uppercase'>{token.user.user_metadata.user_name}</div>
+      <button onClick={handleLogout} className="bg-red-300 uppercase p-2 rounded-full text-white hover:bg-red-400"><IoLogOut/></button>
+    </div>
+    </div>
+    
+      <div className="flex flex-row gap-2 justify-center items-center mt-5 p-2" >
         <input className="border-2 border-blue-200 rounded-lg p-2 w-full max-w-[500px] "
           onChange={(event) => setNewTodo(event.target.value)}
           type="text"
         />
-        <button className="bg-blue-300 uppercase p-2 rounded-lg text-white hover:bg-blue-400" onClick={() => {handleAdd(newTodo)}}> Add </button>
+        <button className="bg-blue-300 uppercase p-2 px-5 rounded-lg text-white hover:bg-blue-400" onClick={() => {handleAdd(newTodo)}}> Add </button>
       </div>
 
 

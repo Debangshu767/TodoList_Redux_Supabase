@@ -5,13 +5,10 @@ const todosSlice = createSlice(
         name : "Todo",
         initialState : {
           todos : [],
-          loading : true,
         },
         reducers : {
             setTodos(state,action) {
               state.todos = action.payload
-              state.loading = false;
-
             },
              createTodo(state,action) {
               state.todos.push(action.payload)

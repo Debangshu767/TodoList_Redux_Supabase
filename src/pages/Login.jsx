@@ -2,9 +2,16 @@ import { supabase } from "../supabaseClient";
 import { object, string } from "yup";
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store/Slices/TokenSlice";
 
 
 function Login() {
+
+  const dispatch = useDispatch();
+
+  const [err,setErr] = useState('')
 
   const navigate = useNavigate()
   
@@ -23,13 +30,19 @@ function Login() {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: values.email,
           password: values.password,
-          
         })
-        console.log(data,error)
+
+        if(error) setErr(error)
+        if(!error)
+        {
+          dispatch(setToken(data))
+          navigate('/home')
+        }
       } catch (error) {
         console.error("Error during login", error); // Debugging log
       }
-      navigate('/home')
+      console.log(data)
+      
     };
   
     return (
@@ -58,7 +71,7 @@ function Login() {
               isSubmitting,
               /* and other goodies */
             }) => (
-              <form className="flex flex-col gap-4 items-center m-auto w-full max-w-[500px]">
+              <form className="flex flex-col gap-4 items-center m-auto w-full max-w-[500px] p-4">
                 <div className="w-full max-w-[500px]">
                   <h2 className="text-lg text-blue-300">Email</h2>
                   <input
@@ -78,7 +91,7 @@ function Login() {
                   <h2 className="text-lg text-blue-300">Password</h2>
                   <input
                     className="border-2 border-blue-200 rounded-lg p-2 w-full max-w-[500px] "
-                    type="text"
+                    type="password"
                     name="password"
                     onBlur={handleBlur}
                     value={values.password}
@@ -90,9 +103,10 @@ function Login() {
                 </div>
                 <div className='flex flex-row gap-4 items-center'>
             <p>Dont Have an account?</p>
-            <Link to={"/Login"}  className="font-bold text-blue-400">Signup</Link>
+            <Link to={"/SignUp"}  className="font-bold text-blue-400">Signup</Link>
           </div>
                 <button className="bg-blue-300 uppercase p-2 rounded-lg text-white hover:bg-blue-400 w-[100px]" type="submit" onClick={handleSubmit}>Login</button>
+                {err && <div className="bg-red-400 p-2 rounded-lg uppercase text-white">{err.message}</div>}
               </form>
             )}
           </Formik>

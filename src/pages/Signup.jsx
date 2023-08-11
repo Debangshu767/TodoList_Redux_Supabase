@@ -63,7 +63,7 @@ function Signup() {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form className="flex flex-col gap-4 items-center m-auto w-full max-w-[500px]">
+            <form className="flex flex-col gap-4 items-center m-auto w-full p-4 max-w-[500px]">
               <div className="w-full max-w-[500px]">
                 <h2 className="text-lg text-blue-300">Username</h2>
                 <input
@@ -96,7 +96,7 @@ function Signup() {
                 <h2 className="text-lg text-blue-300">Password</h2>
                 <input
                   className="border-2 border-blue-200 rounded-lg p-2 w-full max-w-[500px] "
-                  type="text"
+                  type="password"
                   name="password"
                   value={values.password}
                   onChange={handleChange}
@@ -107,9 +107,9 @@ function Signup() {
               </div>
               <div className='flex flex-row gap-4 items-center'>
           <p>Already Have an account?</p>
-          <Link to={"/Login"}  className="font-bold text-blue-400">Login</Link>
+          <Link to={"/"}  className="font-bold text-blue-400">Login</Link>
         </div>
-              <button className="bg-blue-300 uppercase p-2 rounded-lg text-white hover:bg-blue-400 w-[100px]" type="submit" onClick={handleSubmit}>SignUp</button>
+              <button className="bg-blue-300 uppercase p-2 rounded-lg text-white hover:bg-blue-400 w-[100px]" type="submit" onClick={handleSubmit}>Sign Up</button>
             </form>
           )}
         </Formik>
