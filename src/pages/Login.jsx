@@ -49,8 +49,7 @@ function Login() {
       <>
         <div className="flex flex-col gap-2 m-auto">
         <div>
-            <h1 className=" text-3xl bg-blue-400 text-white  font-black p-2  rounded-b-lg  mt-0">TaskIte</h1>
-          <h1 className=" text-3xl text-blue-400  font-thin p-4 rounded-lg">Login</h1>
+            <h1 className=" text-4xl bg-blue-400 text-white  font-black p-2  rounded-b-lg  mt-0">TaskIte</h1>
           </div>
   
           <Formik
